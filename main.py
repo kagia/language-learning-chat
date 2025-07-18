@@ -98,13 +98,17 @@ async def vocalize(content):
     settings = cl.context.session.chat_settings
     client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
 
-    audio_stream = client.text_to_speech.stream(
+    audio_stream = client.text_to_speech.convert(
         text=content,
         voice_id=VOICE_MAP[settings["lang"]],
         model_id="eleven_multilingual_v2",
     )
 
-    stream(audio_stream)
+    audio_bytes = b"".join(audio_stream)
+    await cl.Message(
+        "[audio]",
+        elements=[cl.Audio(content=audio_bytes, auto_play=True)],
+    ).send()
 
 
 async def add_note(content: str):
