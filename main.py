@@ -58,7 +58,7 @@ def initilize_assistant(settings):
         model_client_stream=True,
         tools=[add_note],
         system_message=f"""
-            You are a {settings["lang"]} language tutor. You assist the user by roleplaying a scenario. The style of language is casual.
+            You are a {settings["lang"]} language tutor. You assist the user by roleplaying a scenario. The style of language in all scenarios is casual.
 
             When correcting the user use English, When role playing speak {settings["lang"]}.
 
@@ -141,7 +141,7 @@ async def set_starters(_):
         ),
         cl.Starter(
             label="family",
-            message="Hey assistant I am your sisters new fiance, you are asking me questions about my self.",
+            message="You are my cousin and we haven't seen each other in a long time",
         ),
     ]
 
